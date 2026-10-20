@@ -17,7 +17,7 @@
 
     body {
       --tile-width: 19ch;
-      --amount-of-tiles: 4;
+      --amount-of-tiles: 2;
 
       font-family: sans-serif;
       background: #f4f6f8;
@@ -27,18 +27,20 @@
 
     .container {
       display: grid;
-      display: grid-lanes;
       flow-tolerance: 0;
       grid-template-columns: repeat(auto-fill, var(--tile-width));
-      grid-auto-rows: repeat(auto-fill, calc(var(--tile-width) * 12 / 9));
-      grid-auto-flow: row dense;
+      /* grid-auto-rows: repeat(auto-fill, calc(var(--tile-width) * 12 / 9)); */
+      grid-auto-flow: row;
     }
 
     .selectable-details {
+      --ar-width: 9;
+      --ar-height: 12;
+
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      aspect-ratio: 9/12;
+      aspect-ratio: var(--ar-width) / var(--ar-height);
       anchor-scope: --a;
       anchor-name: --a;
       height: auto;
@@ -64,9 +66,9 @@
 
     .selectable-details:has(details[open]) {
       --amount-of-span: 2;
+
       grid-column: span 2;
       grid-row: span 2;
-      aspect-ratio: 1;
 
       .content {
         width: calc(var(--tile-width) * var(--amount-of-span));
@@ -134,7 +136,8 @@
       margin-trim: block;
     }
 
-    :heading(1), h1 {
+    :heading(1),
+    h1 {
       font-family: Impact, sans-serif;
       font-size: 4rem;
       text-box: trim-both cap alphabetic;
@@ -145,7 +148,7 @@
 </head>
 
 <body>
-  <h1>VPRO DIGITAAL NOODPAKKET</h1>
+  <h1>DIGITAAL NOODPAKKET</h1>
   <div class="container">
     <div class="selectable-details">
       <div class="content">
@@ -290,7 +293,7 @@
             <img src="assets/zomergasten-alida-dors.jpg" alt="Modern workspace">
 
             <div class="summary-title">
-                Zomergasten
+              Zomergasten
             </div>
             <div class="summary-subtile">
               Alida Dors
