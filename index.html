@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VPRO: Digitaal noodpakket</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      padding-inline: 1rem;
+    }
+
+    body {
+      --tile-width: 19ch;
+      --amount-of-tiles: 6;
+
+      font-family: sans-serif;
+      background: #f4f6f8;
+      max-width: calc(var(--tile-width) * var(--amount-of-tiles));
+      margin: 0 auto;
+    }
+
+    .container {
+      display: grid;
+      display: grid-lanes;
+      flow-tolerance: 0;
+      grid-template-columns: repeat(auto-fill, var(--tile-width));
+      grid-template-rows: repeat(auto-fill, calc(var(--tile-width) * 11 / 9));
+      grid-auto-flow: row dense;
+    }
+
+    .selectable-details {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      aspect-ratio: 9/11;
+      anchor-scope: --a;
+      anchor-name: --a;
+      height: auto;
+    }
+
+    .content {
+      background: white;
+      position: absolute;
+      position-anchor: --a;
+      inset: anchor(inside);
+      width: var(--tile-width);
+      border: 1px solid black;
+
+      transition: inset 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
+    }
+
+    .content:not(:nth-child(3n + 1)) {
+      border-left: 0;
+    }
+
+    .content:nth-child(n + 4) {
+      border-top: 0;
+    }
+
+    .selectable-details:has(details[open]) {
+      --amount-of-span: 3;
+      grid-column: span var(--amount-of-span);
+      aspect-ratio: 1;
+
+      .content {
+        width: calc(var(--tile-width) * var(--amount-of-span));
+        /* height: calc((15ch * 3) * 15 / 9); */
+        transition: inset 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+      }
+
+      .details-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .selectable-details input[type="checkbox"] {
+      margin-top: 12px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    details {
+      height: 85%;
+    }
+
+    /* Make the image the clickable summary area */
+    summary {
+      display: block;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 125px;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+
+    .summary-title {
+      padding: 1rem 0.25rem;
+      text-align: center;
+    }
+
+    .details-content {
+      padding: 0 20px 20px;
+      color: #555;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      transition-delay: 0.3s;
+      margin-trim: block;
+    }
+
+    :heading(1), h1 {
+      font-family: Impact, sans-serif;
+      font-size: 4rem;
+      text-box: trim-both cap alphabetic;
+      margin-block: 0.66em 0.33em;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>VPRO DIGITAAL NOODPAKKET</h1>
+  <div class="container">
+    <div class="selectable-details">
+      <div class="content">
+        <input type="checkbox" aria-label="Select Modern Workspace">
+
+        <details>
+          <summary>
+            <img src="assets/waterfles.jpeg" alt="Modern workspace">
+
+            <div class="summary-title">
+              Water
+            </div>
+          </summary>
+
+          <div class="details-content">
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+        </details>
+      </div>
+    </div>
+
+    <div class="selectable-details">
+      <div class="content">
+        <input type="checkbox" aria-label="Select Modern Workspace">
+
+        <details>
+          <summary>
+            <img src="assets/vuur.jpeg" alt="Modern workspace">
+
+            <div class="summary-title">
+              Vuur
+            </div>
+          </summary>
+
+          <div class="details-content">
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+        </details>
+      </div>
+    </div>
+
+    <div class="selectable-details">
+      <div class="content">
+        <input type="checkbox" aria-label="Select Modern Workspace">
+
+        <details>
+          <summary>
+            <img src="assets/ehbo.jpeg" alt="Modern workspace">
+
+            <div class="summary-title">
+              EHBO set
+            </div>
+          </summary>
+
+          <div class="details-content">
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="selectable-details">
+      <div class="content">
+        <input type="checkbox" aria-label="Select Modern Workspace">
+
+        <details>
+          <summary>
+            <img src="assets/sos.png" alt="Modern workspace">
+
+            <div class="summary-title">
+              Noodnummers
+            </div>
+          </summary>
+
+          <div class="details-content">
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="selectable-details">
+      <div class="content">
+        <input type="checkbox" aria-label="Select Modern Workspace">
+
+        <details>
+          <summary>
+            <img src="assets/nms-abel-van-gijlswijk-portrait.png" alt="Modern workspace">
+
+            <div class="summary-title">
+              NMS: Abel
+            </div>
+          </summary>
+
+          <div class="details-content">
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="selectable-details">
+      <div class="content">
+        <input type="checkbox" aria-label="Select Modern Workspace">
+
+        <details>
+          <summary>
+            <img src="assets/zomergasten-alida-dors.jpg" alt="Modern workspace">
+
+            <div class="summary-title">
+              ZG: Alida Dors
+            </div>
+          </summary>
+
+          <div class="details-content">
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+            <p>
+              This workspace combines a clean design with a comfortable
+              environment to support focus and productivity.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
