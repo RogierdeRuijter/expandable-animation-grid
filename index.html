@@ -17,7 +17,7 @@
 
     body {
       --tile-width: 19ch;
-      --amount-of-tiles: 6;
+      --amount-of-tiles: 4;
 
       font-family: sans-serif;
       background: #f4f6f8;
@@ -30,7 +30,7 @@
       display: grid-lanes;
       flow-tolerance: 0;
       grid-template-columns: repeat(auto-fill, var(--tile-width));
-      grid-template-rows: repeat(auto-fill, calc(var(--tile-width) * 11 / 9));
+      grid-auto-rows: repeat(auto-fill, calc(var(--tile-width) * 12 / 9));
       grid-auto-flow: row dense;
     }
 
@@ -38,7 +38,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      aspect-ratio: 9/11;
+      aspect-ratio: 9/12;
       anchor-scope: --a;
       anchor-name: --a;
       height: auto;
@@ -51,7 +51,6 @@
       inset: anchor(inside);
       width: var(--tile-width);
       border: 1px solid black;
-
       transition: inset 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
     }
 
@@ -64,8 +63,9 @@
     }
 
     .selectable-details:has(details[open]) {
-      --amount-of-span: 3;
-      grid-column: span var(--amount-of-span);
+      --amount-of-span: 2;
+      grid-column: span 2;
+      grid-row: span 2;
       aspect-ratio: 1;
 
       .content {
@@ -112,8 +112,16 @@
     }
 
     .summary-title {
-      padding: 1rem 0.25rem;
+      padding: 1rem 0.25rem 0;
       text-align: center;
+      text-decoration: underline;
+    }
+
+    .summary-subtile {
+      padding: 0.25rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
     }
 
     .details-content {
@@ -143,7 +151,7 @@
       <div class="content">
         <input type="checkbox" aria-label="Select Modern Workspace">
 
-        <details>
+        <details name="story">
           <summary>
             <img src="assets/waterfles.jpeg" alt="Modern workspace">
 
@@ -165,7 +173,7 @@
       <div class="content">
         <input type="checkbox" aria-label="Select Modern Workspace">
 
-        <details>
+        <details name="story">
           <summary>
             <img src="assets/vuur.jpeg" alt="Modern workspace">
 
@@ -192,7 +200,7 @@
       <div class="content">
         <input type="checkbox" aria-label="Select Modern Workspace">
 
-        <details>
+        <details name="story">
           <summary>
             <img src="assets/ehbo.jpeg" alt="Modern workspace">
 
@@ -220,7 +228,7 @@
       <div class="content">
         <input type="checkbox" aria-label="Select Modern Workspace">
 
-        <details>
+        <details name="story">
           <summary>
             <img src="assets/sos.png" alt="Modern workspace">
 
@@ -247,12 +255,15 @@
       <div class="content">
         <input type="checkbox" aria-label="Select Modern Workspace">
 
-        <details>
+        <details name="story">
           <summary>
             <img src="assets/nms-abel-van-gijlswijk-portrait.png" alt="Modern workspace">
 
             <div class="summary-title">
-              NMS: Abel
+              Nooit meer slapen
+            </div>
+            <div class="summary-subtile">
+              Abel van Gijlswijk
             </div>
           </summary>
 
@@ -274,12 +285,15 @@
       <div class="content">
         <input type="checkbox" aria-label="Select Modern Workspace">
 
-        <details>
+        <details name="story">
           <summary>
             <img src="assets/zomergasten-alida-dors.jpg" alt="Modern workspace">
 
             <div class="summary-title">
-              ZG: Alida Dors
+                Zomergasten
+            </div>
+            <div class="summary-subtile">
+              Alida Dors
             </div>
           </summary>
 
