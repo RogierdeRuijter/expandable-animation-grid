@@ -1,0 +1,209 @@
+---
+import { getCollection } from "astro:content";
+
+const [items, categories] = await Promise.all([
+  getCollection("items"),
+  getCollection("categories"),
+]);
+
+categories.sort((a, b) => a.data.order - b.data.order);
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VPRO: Digitaal noodpakket</title>
+  </head>
+  <body>
+    <main>
+      <h1>Digitaal noodpakket</h1>
+      {categories.map((category) => {
+        const categoryItems = items
+          .filter((item) => item.data.category.id === category.id)
+          .sort((a, b) => a.data.order - b.data.order);
+
+        return (
+          <section aria-labelledby={`${category.id}-heading`}>
+            <h2 id={`${category.id}-heading`}>{category.data.title}</h2>
+            <div class="container">
+              {categoryItems.map((item) => (
+                <article class="selectable-details">
+                  <div class="content">
+                    <input
+                      type="checkbox"
+                      aria-label={`Selecteer ${item.data.title}`}
+                    />
+                    <details name={category.id}>
+                      <summary>
+                        <img src={item.data.image} alt={item.data.imageAlt} />
+                        <div class="summary-title">{item.data.title}</div>
+                        {item.data.subtitle && (
+                          <div class="summary-subtitle">
+                            {item.data.subtitle}
+                          </div>
+                        )}
+                      </summary>
+                      <div
+                        class="details-content"
+                        set:html={item.data.content}
+                      />
+                    </details>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </main>
+  </body>
+</html>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    padding-inline: 1rem;
+  }
+
+  body {
+    --tile-width: 30ch;
+    font-family: sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+  }
+
+  main {
+    max-width: calc(var(--tile-width) * 4);
+    margin: 0 auto;
+  }
+
+  section + section {
+    margin-top: 3rem;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--tile-width));
+    grid-auto-rows: var(--tile-width);
+  }
+
+  .selectable-details {
+    --ar-width: 9;
+    --ar-height: 9;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    aspect-ratio: var(--ar-width) / var(--ar-height);
+    anchor-scope: --tile;
+    anchor-name: --tile;
+    height: auto;
+  }
+
+  .content {
+    background: white;
+    position: absolute;
+    position-anchor: --tile;
+    inset: anchor(inside);
+    width: var(--tile-width);
+    border: 1px solid black;
+    transition:
+      inset 0.2s ease-out,
+      height 0.2s ease-out;
+  }
+
+  .selectable-details:has(details[open]) {
+    grid-row: span 2;
+  }
+
+  .selectable-details:has(details[open]) .content {
+    height: calc(var(--tile-width) * 2 * (var(--ar-height) / var(--ar-width)));
+    transition:
+      inset 0.3s ease-out,
+      height 0.3s ease-out;
+  }
+
+  .selectable-details input[type="checkbox"] {
+    margin-top: 12px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  details {
+    height: 85%;
+  }
+  summary {
+    display: block;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 125px;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+  }
+
+  .summary-title {
+    padding: 1rem 0.25rem 0;
+    text-align: center;
+    text-decoration: underline;
+  }
+  .summary-subtitle {
+    padding: 0.25rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .details-content {
+    padding: 0 20px 20px;
+    color: #555;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.2s ease-out;
+  }
+
+  .selectable-details:has(details[open]) .details-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h1,
+  h2 {
+    font-family: Impact, sans-serif;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: 4rem;
+    text-align: center;
+    margin-block: 0.66em 0.33em;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-block: 1rem 0.5rem;
+  }
+
+  @media (max-width: 32rem) {
+    body {
+      --tile-width: min(100%, 30ch);
+    }
+    .container {
+      justify-content: center;
+    }
+  }
+</style>

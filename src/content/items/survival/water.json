@@ -1,0 +1,8 @@
+{
+  "title": "Water",
+  "image": "/assets/waterfles.jpeg",
+  "imageAlt": "Waterfles",
+  "content": "<p>Zorg dat je voldoende drinkwater op voorraad hebt voor een noodsituatie. Reken op ongeveer drie liter per persoon per dag.</p>",
+  "category": "survival",
+  "order": 1
+}

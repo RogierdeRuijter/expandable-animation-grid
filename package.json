@@ -1,0 +1,18 @@
+{
+  "name": "digitaal-noodpakket",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.16.8"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1"
+  }
+}
