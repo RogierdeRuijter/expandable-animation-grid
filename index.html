@@ -16,8 +16,8 @@
     }
 
     body {
-      --tile-width: 19ch;
-      --amount-of-tiles: 2;
+      --tile-width: 30ch;
+      --amount-of-tiles: 4;
 
       font-family: sans-serif;
       background: #f4f6f8;
@@ -32,7 +32,7 @@
 
     .selectable-details {
       --ar-width: 9;
-      --ar-height: 12;
+      --ar-height: 9;
 
       display: flex;
       align-items: flex-start;
@@ -64,12 +64,11 @@
     .selectable-details:has(details[open]) {
       --amount-of-span: 2;
 
-      grid-column: span 2;
       grid-row: span 2;
 
       .content {
-        width: calc(var(--tile-width) * var(--amount-of-span));
-        /* height: calc((15ch * 3) * 15 / 9); */
+        /* width: calc(var(--tile-width) * var(--amount-of-span)); */
+        height: calc(var(--tile-width) * var(--amount-of-span) * (var(--ar-height) / var(--ar-width))); 
         transition: inset 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
       }
 
@@ -129,7 +128,6 @@
       line-height: 1.6;
       opacity: 0;
       transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-      transition-delay: 0.3s;
     }
 
     :heading(1),
