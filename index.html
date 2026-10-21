@@ -27,10 +27,7 @@
 
     .container {
       display: grid;
-      flow-tolerance: 0;
       grid-template-columns: repeat(auto-fill, var(--tile-width));
-      /* grid-auto-rows: repeat(auto-fill, calc(var(--tile-width) * 12 / 9)); */
-      grid-auto-flow: row;
     }
 
     .selectable-details {
@@ -133,7 +130,6 @@
       opacity: 0;
       transition: opacity 0.2s ease-out, transform 0.2s ease-out;
       transition-delay: 0.3s;
-      margin-trim: block;
     }
 
     :heading(1),
